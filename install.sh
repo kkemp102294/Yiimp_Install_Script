@@ -1,12 +1,14 @@
 #!/bin/bash
 ################################################################################
-# Original Author:   crombiecrunch
-# Current Author: GreeneTech
-# Web:     GreeneTech Mining 
+# Original Authors:   crombiecrunch, GreeneTech
+# Current Author: Minerpools.us
+# Web:     Minerpools.us
 #
 # Program:
-#   Install yiimp on Ubuntu 16.04 running Nginx, MariaDB, and php7.x
-# BTC Donation: 1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm
+#   Install yiimp on Ubuntu 18.04 running Nginx, MariaDB, and php7.2
+# BTC Donation: Original Author: 1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm
+# BTC Donation: Current Author:  32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX
+# LTC Donation: Current Author:  MVVrDMdRTogpWSg4i3CG9oWDkzSrJawsbg
 # 
 ################################################################################
 output() {
@@ -36,7 +38,7 @@ output ""
     read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server prior to running the script!! [Y/n]: " ssl_install
     
     clear 
-    output "If you found this helpful, please donate to BTC Donation: 1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm
+    output "If you found this helpful, please donate to BTC Donation: 32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX"
     output ""
     output "Updating system and installing required packages."
     output ""
@@ -74,10 +76,10 @@ default         0;
     export DEBIAN_FRONTEND="noninteractive"
     sudo aptitude -y install mariadb-server
     
-    output "Installing php7.x and other needed files"
+    output "Installing php7.2 and other needed files"
     output ""
-    sudo aptitude -y install php7.0-fpm
-    sudo aptitude -y install php7.0-opcache php7.0-fpm php7.0 php7.0-common php7.0-gd php7.0-mysql php7.0-imap php7.0-cli php7.0-cgi php-pear php-auth php7.0-mcrypt mcrypt imagemagick libruby php7.0-curl php7.0-intl php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl memcached php-memcache php-imagick php-gettext php7.0-zip php7.0-mbstring
+    sudo aptitude -y install php7.2-fpm
+    sudo aptitude -y install php7.2-opcache php7.2-fpm php7.2 php7.2-common php7.2-gd php7.2-mysql php7.2-imap php7.2-cli php7.2-cgi php-pear php-auth php7.2-mcrypt mcrypt imagemagick libruby php7.2-curl php7.2-intl php7.2-pspell php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php-memcache php-imagick php-gettext php7.2-zip php7.2-mbstring
     sudo phpenmod mcrypt
     sudo phpenmod mbstring
     sudo aptitude -y install libgmp3-dev
@@ -269,7 +271,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -301,7 +303,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -385,7 +387,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -416,7 +418,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -427,7 +429,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
 ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 	fi
 sudo service nginx restart
-sudo service php7.0-fpm reload
+sudo service php7.2-fpm reload
 else
 echo 'include /etc/nginx/blockuseragents.rules;
 	server {
@@ -466,7 +468,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -498,7 +500,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -582,7 +584,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -613,7 +615,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.2-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -624,7 +626,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
 ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 	fi
 sudo service nginx restart
-sudo service php7.0-fpm reload
+sudo service php7.2-fpm reload
 fi
     clear
     output "Now for the database fun!"
@@ -685,7 +687,7 @@ define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
 
     output "Database 'yiimpfrontend' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you"
     output ""
-    output "BTC Donation: 1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm"
+    output "BTC Donation: 32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX"
     output ""
     
     output "Peforming the SQL import"
@@ -739,7 +741,7 @@ define('"'"'YIIMP_PUBLIC_EXPLORER'"'"', true);
 define('"'"'YIIMP_PUBLIC_BENCHMARK'"'"', false);
 define('"'"'YIIMP_FIAT_ALTERNATIVE'"'"', '"'"'USD'"'"'); // USD is main
 define('"'"'YAAMP_USE_NICEHASH_API'"'"', false);
-define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm'"'"');
+define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX'"'"');
 define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
 define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
 define('"'"'YAAMP_SITE_NAME'"'"', '"'"'PoolofD32th'"'"');
@@ -773,7 +775,7 @@ define('"'"'NICEHASH_API_ID'"'"','"'"'9205'"'"');
 define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3J9tapPoFCtouAZH7Th8HAPsD8aoykEHzk'"'"');
 define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
 $cold_wallet_table = array(
-	'"'"'1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm'"'"' => 0.10,
+	'"'"'32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX'"'"' => 0.10,
 );
 // Sample fixed pool fees
 $configFixedPoolFees = array(
@@ -821,7 +823,7 @@ sudo chmod -R 644 /var/log/debug.log
 sudo chmod -R 775 /var/web/serverconfig.php
 sudo mv $HOME/yiimp/ $HOME/yiimp-install
 sudo service nginx restart
-sudo service php7.0-fpm reload
+sudo service php7.2-fpm reload
 clear
 output "Whew that was fun, just some reminders. Your mysql information is saved in ~/.my.cnf. this installer did not directly install anything required to build coins."
 output ""
@@ -829,4 +831,4 @@ output "Please make sure to change your wallet addresses in the /var/web/serverc
 output ""
 output "Please make sure to add your public and private keys."
 output ""
-output "If you found this script helpful please consider donating some BTC Donation: 1ACNkc4ipJNefTLTECNjNt5LmsK82jG6bm"
+output "If you found this script helpful please consider donating some BTC Donation: 32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX"
