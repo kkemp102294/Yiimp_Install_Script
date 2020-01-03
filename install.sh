@@ -23,7 +23,7 @@ displayErr() {
     echo
     exit 1;
 }
-clear
+# clear
 output "Make sure you double check before hitting enter! Only one shot at these!"
 output ""
     read -e -p "Enter time zone (e.g. America/New_York) : " TIME
@@ -37,7 +37,7 @@ output ""
     read -e -p "Install UFW and configure ports? [Y/n] : " UFW
     read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server prior to running the script!! [Y/n]: " ssl_install
 
-    clear
+    # clear
     output "If you found this helpful, please donate to BTC Donation: 32K8oS6qqp87gHaC7bWiwEgZdNgaYpckpX"
     output ""
     output "Updating system and installing required packages."
@@ -47,7 +47,7 @@ output ""
     sudo apt-get -y update
     sudo apt-get -y upgrade
     sudo apt-get -y autoremove
-    clear
+    # clear
     output "Switching to Aptitude"
     output ""
     sudo apt-get -y install aptitude
@@ -96,7 +96,7 @@ default         0;
     sudo aptitude -y install sendmail
     sudo aptitude -y install git
     sudo aptitude -y install pwgen -y
-    clear
+    # clear
 
     #Generating Random Passwords
     password=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
@@ -161,7 +161,7 @@ default         0;
     sudo ufw --force enable
     fi
 
-    clear
+    # clear
     output "Installing phpmyadmin"
     output ""
     echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect" | sudo debconf-set-selections
@@ -179,7 +179,7 @@ default         0;
     #Generating Random Password for stratum
     blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
     cd ~
-    git clone https://github.com/tpruvot/yiimp.git
+    git clone https://github.com/kkemp102294/yiimp.git
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     sudo make
@@ -229,7 +229,7 @@ sudo chmod +x /var/stratum/config/run.sh
     sudo aptitude -y install ntpdate
     # write time to clock.
     sudo hwclock -w
-    clear
+    # clear
     output "Making Web Server Magic Happen!"
     # adding user to group, creating dir structure, setting permissions
       sudo mkdir -p /var/www/$server_name/html
@@ -630,7 +630,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
 sudo service nginx restart
 sudo service php7.2-fpm reload
 fi
-    clear
+    # clear
     output "Now for the database fun!"
     # create database
     Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend;"
@@ -715,7 +715,7 @@ define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
      sudo mysql --defaults-group-suffix=host1 --force < 2017-10-bookmarks.sql
      sudo mysql --defaults-group-suffix=host1 --force < 2017-11-segwit.sql
 
-    clear
+    # clear
     output "Generating a basic serverconfig.php"
     output ""
     # make config file
@@ -826,7 +826,7 @@ sudo chmod -R 775 /var/web/serverconfig.php
 sudo mv $HOME/yiimp/ $HOME/yiimp-install
 sudo service nginx restart
 sudo service php7.2-fpm reload
-clear
+# clear
 output "Whew that was fun, just some reminders. Your mysql information is saved in ~/.my.cnf. this installer did not directly install anything required to build coins."
 output ""
 output "Please make sure to change your wallet addresses in the /var/web/serverconfig.php file."
